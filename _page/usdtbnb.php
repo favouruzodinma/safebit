@@ -21,7 +21,7 @@ $usdtbnbPrice = $prices['usd-tether']['usd'] ?? $defaultPrices['usd-tether'];
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../cft-logo2.png" >
-    <title>Cool Wallet</title>
+    <title>SAFEBIT Wallet</title>
     <!-- This page CSS -->
     <link rel="stylesheet" href="./style.css">
     
@@ -115,78 +115,78 @@ $usdtbnbPrice = $prices['usd-tether']['usd'] ?? $defaultPrices['usd-tether'];
     </center>
     <?php }} ?>
  </main>
- <section class="history">
+ <section class="history" style="height: 50vh;">
     <center>
-    <a class="coin" href="javascript:void(0)">
-        <div class="coinimg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
-            </svg>
-            <div>
-                <h5 style="position:relative; left:-50px">Transfer</h5>
-                <small style="font-size:12px" class="text-muted">To:3GWHJ3873BDgs.....ub28vw</small>
-            </div>
-        </div>
-        <div>
-            <h5 class="text-success">+0.007492 USDT</h5>
-            <small style="font-size:13px; position:relative; right:-20px" class="text-muted">$321.05</small>
-        </div>
-    </a>
-    </center>
-    <center>
-    <a class="coin" href="javascript:void(0)">
-        <div class="coinimg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
-            </svg>
-            <div>
-                <h5 style="position:relative; left:-50px">Transfer</h5>
-                <small style="font-size:12px" class="text-muted">To:3GWHJ3873BDgs.....ub28vw</small>
-            </div>
-        </div>
-        <div>
-            <h5 class="text-success">+0.007492 USDT</h5>
-            <small style="font-size:13px; position:relative; right:-20px" class="text-muted">$321.05</small>
-        </div>
-    </a>
-    </center>
-    <center>
-    <a class="coin" href="javascript:void(0)">
-        <div class="coinimg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
-            </svg>
-            <div>
-                <h5 style="position:relative; left:-50px">Transfer</h5>
-                <small style="font-size:12px" class="text-muted">To:3GWHJ3873BDgs.....ub28vw</small>
-            </div>
-        </div>
-        <div>
-            <h5 class="text-success">+0.007492 USDT</h5>
-            <small style="font-size:13px; position:relative; right:-20px" class="text-muted">$321.05</small>
-        </div>
-    </a>
-    </center>
-    <center>
-    <a class="coin" href="javascript:void(0)">
-        <div class="coinimg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
-            </svg>
-            <div>
-                <h5 style="position:relative; left:-50px">Transfer</h5>
-                <small style="font-size:12px" class="text-muted">To:3GWHJ3873BDgs.....ub28vw</small>
-            </div>
-        </div>
-        <div>
-            <h5 class="text-success">+0.007492 USDT</h5>
-            <small style="font-size:13px; position:relative; right:-20px" class="text-muted">$321.05</small>
-        </div>
-    </a>
-    </center>
-    
+    <?php 
+      function shortenWalletAddress($address) {
+          // Adjust the length based on your preference
+          $length = 26;
+      
+          // Check if the address is longer than the desired length
+          if (strlen($address) > $length) {
+              // Keep the first and last $length/2 characters and add "..." in between
+              $shortenedAddress = substr($address, 0, $length / 2) . '...' . substr($address, -$length / 4);
+              return $shortenedAddress;
+          } else {
+              return $address; // Return the original address if it's already short
+          }
+      }
+      
+      $userid = $_SESSION['userid'];
+      
+      // Assume $conn is your database connection
+      // If not, you need to establish a connection before preparing the statement
+      
+      // Prepare a statement
+      $stmt = $conn->prepare("SELECT * FROM history WHERE userid = ? AND coinType = ?");
+      $coinType = 'usd-tether'; // Set coinType as 'bitcoin'
+      $stmt->bind_param("ss", $userid, $coinType);
+      $stmt->execute();
+      
+      $result = $stmt->get_result();
+      
+      if ($result->num_rows > 0) {
+          $num = 1;
+          while ($row = $result->fetch_assoc()) {
+      ?>
+              <a class="coin" href="javascript:void(0)">
+                  <div class="coinimg">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+                      </svg>
+                      <div>
+                          <h5 style="position:relative; left:-50px">Transfer</h5>
+                          <small style="font-size:12px" class="text-muted">To: <?php echo shortenWalletAddress($row['wallet']); ?></small>
+                      </div>
+                  </div>
+                  <div>
+                      <h5 class="text-success">+<?php echo $row['updated_balance']; ?> BTC</h5>
+                      <small style="font-size:13px; position:relative; right:-20px" class="text-muted">
+                          <?php
+                          $usdtbnbPrice =  // assuming $usdtbnbPrice is defined somewhere
+                          $newusdtbnb_result = $usdtbnbPrice * $row['updated_balance'];
+                          echo '$' . number_format($newusdtbnb_result);
+                          ?>
+                      </small>
+                  </div>
+              </a>
+          <?php
+          }
+      } else {
+          ?>
+          <center style="position:relative; bottom:-145px">
+          <div class="text-center text-muted" >
+            <p> Transaction will appear here.</p>
+            <p>Cannot find your transaction? <span class="text-success">Check explorer</span> </p>
+            <a href="https://www.moonpay.com/en-gb/" class="btn btn-success"> BUY USDT BNB</a>
+          </div>
+          </center>
+      <?php
+      }
+      ?>
+      
  </section>
- <footer class="mt-5 sticky">
+ <footer class="mt-5 sticky" style="height: 5vh;">
     <p class="text-light" style="font-size:20px">Current coin price</p>
     <center>
     <div style=" padding: 0px; margin: 0px; width: 100%">

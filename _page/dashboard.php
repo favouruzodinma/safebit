@@ -45,8 +45,8 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../../cft-logo2.png" >
-    <title>Cool Wallet</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="SBT_logo.png" >
+    <title>SAFEBIT Wallet</title>
     <!-- This page CSS -->
     <link rel="stylesheet" href="./style.css">
     

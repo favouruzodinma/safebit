@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../cft-logo2.png" >
-    <title>Cool Wallet</title>
+    <title>SAFEBIT Wallet</title>
     <!-- This page CSS -->
     <link rel="stylesheet" href="./style.css">
     

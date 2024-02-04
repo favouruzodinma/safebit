@@ -16,7 +16,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../cft-logo2.png" >
-    <title>Admin Cool Wallet</title>
+    <title>Admin SAFEBIT Wallet</title>
     <!-- This page CSS -->
     <!-- chartist CSS -->
     <link href="../assets/node_modules/morrisjs/morris.css" rel="stylesheet">
