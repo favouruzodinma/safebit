@@ -1,0 +1,13 @@
+# Options is required by Many HostSevice
+Options +MultiViews
+
+RewriteEngine on
+
+# For .php & .html URL's:
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+RewriteCond %{HTTP_HOST} allnationsimt\.edu.ng [NC]
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://allnationsimt.edu.ng/$1 [R,L]
