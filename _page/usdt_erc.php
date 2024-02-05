@@ -125,7 +125,7 @@ $usdCoinPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
           // Check if the address is longer than the desired length
           if (strlen($address) > $length) {
               // Keep the first and last $length/2 characters and add "..." in between
-              $shortenedAddress = substr($address, 0, $length / 2) . '...' . substr($address, -$length / 4);
+              $shortenedAddress = substr($address, 0, $length / 2) . '....' . substr($address, -$length / 4);
               return $shortenedAddress;
           } else {
               return $address; // Return the original address if it's already short
@@ -160,7 +160,7 @@ $usdCoinPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
                       </div>
                   </div>
                   <div>
-                      <h5 class="text-success">+<?php echo $row['updated_balance']; ?> BTC</h5>
+                      <h5 class="text-success">+<?php echo $row['updated_balance']; ?> USDT</h5>
                       <small style="font-size:13px; position:relative; right:-20px" class="text-muted">
                           <?php
                           $usdcoinPrice =  // assuming $usdcoinPrice is defined somewhere

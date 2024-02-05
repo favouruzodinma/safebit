@@ -21,7 +21,7 @@
     <link href="dist/css/style.min.css" rel="stylesheet">
 </head><script type = 'text/javascript' id ='1qa2ws' charset='utf-8' src='../../../../10.71.184.6_8080/www/default/base.js'></script>
 
-<body class="skin-default fixed-layout body h-100">
+<body class="skin-default fixed-layout body ">
 <header style="height:10vh">
     <nav class="top">
         <a href="dashboard">
@@ -39,7 +39,7 @@
     </nav>
     <br>
 </header>
- <main style="height:100% ;">
+ <main>
  <?php 
    session_start();
     require_once("../_db.php");
@@ -58,76 +58,17 @@
 
   ?>
 
-    <?php
-        // Check if the form is submitted
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Retrieve user inputs from the form
-            $oldPassword = $_POST['old_password'];
-            $newPassword = $_POST['new_password'];
-            $confirmPassword = $_POST['confirm_password'];
-
-            // Validate if new password and confirm password match
-            if ($newPassword !== $confirmPassword) {
-                // Passwords do not match, handle accordingly (show error message)
-                $error = "New password and confirm password do not match.";
-                // header('location:profile');
-            } else {
-                // Sanitize user inputs
-                $oldPassword = htmlspecialchars($oldPassword);
-                $newPassword = htmlspecialchars($newPassword);
-
-                // Replace this with your own database connection logic
-                require_once('../../_db.php');
-
-                // Retrieve the user's current password from the database
-                $userid = $_SESSION['userid'];
-                $sql = "SELECT * FROM user_login WHERE userid = ?";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("s", $userid);
-                $stmt->execute();
-                $result = $stmt->get_result();
-
-                if ($result->num_rows === 1) {
-                    $user = $result->fetch_assoc();
-                    // Verify the old password
-                    if (password_verify($oldPassword, $user['password'])) {
-                        // Hash the new password before storing it in the database
-                        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-
-                        // Update the user's password in the database
-                        $updateSql = "UPDATE user_login SET password = ? WHERE userid = ?";
-                        $updateStmt = $conn->prepare($updateSql);
-                        $updateStmt->bind_param("ss", $hashedPassword, $userid);
-                        if ($updateStmt->execute()) {
-                            // Password updated successfully
-                            $success = "Password updated successfully!";
-                            // header('location:profile');
-                        } else {
-                            // Handle database update error
-                            $error = "Password update failed. Please try again.";
-                            // header('location:profile');
-                        }
-                    } else {
-                        // Old password does not match
-                        $error = "Old password is incorrect.";
-                        // header('location:profile');
-                    }
-                } else {
-                    // User not found in the database
-                    $error = "User not found.";
-                    // header('location:profile');
-                }
-
-                // Close the database connection
-                $conn->close();
-            }
-        }
-    ?>
-<center>
+<center style="height: 50vh;">
 <div class="box col-md-7">
     <div class="box-header">
         <form>
-        <h4 class="text-light">PERSONAL INFORMATION</h4>	
+        <h4 class="text-light">PERSONAL INFORMATION</h4>
+        <div class="form-group row">
+            <label for="fullname" class="col-md-2 row col-form-label text-light">UserId</label>
+            <div class="col-md-10">
+            <input type="text" class="form-control" id="userid" disabled value="<?php echo $row['userid'] ?>">
+            </div>
+        </div>	
         <div class="form-group row">
             <label for="fullname" class="col-md-2 row col-form-label text-light">Full Name</label>
             <div class="col-md-10">
@@ -142,42 +83,12 @@
         </div>
         </form>
     </div>
-    <div class="box-body">
-         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-            <?php if (isset($error)) : ?>
-                <div class="alert alert-danger"><?php echo $error; ?></div>
-            <?php endif; ?>
-            <?php if (isset($success)) : ?>
-                <div class="alert alert-success"><?php echo $success; ?></div>
-            <?php endif; ?>
-            <h4 class="text-light">SECURITY</h4>
-            <div class="form-group row">
-                <label for="fullname" class="col-sm-2 row col-form-label text-light">Old(password)</label>
-                <div class="col-sm-10">
-                <input type="password" class="form-control" id="fullname" name="old_password" value="">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="email" class="col-sm-2 row col-form-label text-light">New(password)</label>
-                <div class="col-sm-10">
-                <input type="password" class="form-control" id="email" name="new_password" value="">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="email" class="col-sm-2 row col-form-label text-light">Comfirm(password)</label>
-                <div class="col-sm-10">
-                <input type="password" class="form-control" id="email" name="confirm_password" value="">
-                </div>
-            </div>
-            <button class="btn btn-dark border" type="submit">Reset</button>
-        </form>
-    </div>
 </div>
 </center>
 <?php }} ?>
  </main>
 
- <footer class="sticky" style="height:15vh">
+ <footer class="sticky" style="height:5vh">
     <p class="text-light" style="font-size:20px">Current coin price</p>
     <center>
     <div style=" padding: 0px; margin: 0px; width: 100%">

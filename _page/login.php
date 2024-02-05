@@ -33,48 +33,57 @@
             <div class="login-box card">
                 <div class="card-body">
                 <?php
-                    require_once('_db.php'); // Your database connection script
+                require_once('_db.php'); // Your database connection script
 
-                    if (isset($_POST['user_login'])) {
-                        $email = $_POST['email'];
-                        $password = $_POST['password'];
-                        
-                        $sql = "SELECT * FROM user_login WHERE email = ?";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->bind_param("s", $email);
-                        $stmt->execute();
+                if (isset($_POST['user_login'])) {
+                    $email = $_POST['email'];
+                    $password = $_POST['password'];
+                    
+                    $sql = "SELECT * FROM user_login WHERE email = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("s", $email);
+                    $stmt->execute();
 
-                        $result = $stmt->get_result();
+                    $result = $stmt->get_result();
 
-                        if ($result->num_rows === 1) {
-                            $user = $result->fetch_assoc();
+                    if ($result->num_rows === 1) {
+                        $user = $result->fetch_assoc();
 
-                            if (password_verify($password, $user['password'])) {
-                                $_SESSION['userid'] = $user['userid'];
-                                $_SESSION['user'] = 'yes';
+                        if (password_verify($password, $user['password'])) {
+                            $_SESSION['userid'] = $user['userid'];
+
+                            if ($user['status'] === 'pending') {
                                 $userid = $_SESSION['userid'];
-                                header("Location:_page/dashboard?userid=$userid");
+                                $email = $_SESSION['email'];
+                                header("Location: verify?userid=$userid");
                                 exit;
                             } else {
-                                $error = "
-                                <div class='alert alert-danger d-flex justify-space-between' role='alert'>
-                                    <strong>Password does not match this email address!</strong> 
-                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                        <span aria-hidden='true'>&times;</span>
-                                    </button>
-                                </div>";
+                                $_SESSION['user'] = 'yes';
+                                $userid = $_SESSION['userid'];
+                                header("Location: _page/dashboard?userid=$userid");
+                                exit;
                             }
                         } else {
                             $error = "
                             <div class='alert alert-danger d-flex justify-space-between' role='alert'>
-                                <strong>Invalid Email or Password submitted!</strong> 
+                                <strong>Password does not match this email address!</strong> 
                                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                     <span aria-hidden='true'>&times;</span>
                                 </button>
                             </div>";
                         }
+                    } else {
+                        $error = "
+                        <div class='alert alert-danger d-flex justify-space-between' role='alert'>
+                            <strong>Invalid Email or Password submitted!</strong> 
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                        </div>";
                     }
+                }
                 ?>
+
                   <?php
                     if(isset($_POST['create_wallet'])){
                         $userid = ("SBT" .rand(203994 , 485789));

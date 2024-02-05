@@ -160,7 +160,7 @@ $tetherPrice = $prices['tether']['usd'] ?? $defaultPrices['tether'];
                       </div>
                   </div>
                   <div>
-                      <h5 class="text-success">+<?php echo $row['updated_balance']; ?> BTC</h5>
+                      <h5 class="text-success">+<?php echo $row['updated_balance']; ?> USDT</h5>
                       <small style="font-size:13px; position:relative; right:-20px" class="text-muted">
                           <?php
                           $tetherPrice =  // assuming $tetherPrice is defined somewhere

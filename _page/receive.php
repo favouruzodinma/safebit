@@ -46,7 +46,7 @@
         <a href="#">Notification</a>
         <a href="#">Phrase</a>
         <a href="#">Security</a>
-        <a href="#">About</a>
+        <a href="support">Support</a>
         <a href="../app/_page/connect">WalletConnect</a>
 
         </div>

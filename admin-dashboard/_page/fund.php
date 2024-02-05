@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fundwallet'])) {
                         // Email notification to the user
                         $to = $email;
                         $subject = 'Funds Added to Your Wallet';
-                        $message = "Your Cool Wallet $coinType  was funded with $amountValue $coinType. Thank you!";
+                        $message = "Your SAFEBIT  $coinType Wallet  was funded with $amountValue $coinType. Thank you!";
                         $headers = "From: Coolwallet.org";
 
                         // Send the email
