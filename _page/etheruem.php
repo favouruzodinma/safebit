@@ -163,7 +163,7 @@ $ethereumPrice = $prices['ethereum']['usd'] ?? $defaultPrices['ethereum'];
                       <h5 class="text-success">+<?php echo $row['updated_balance']; ?> ETH</h5>
                       <small style="font-size:13px; position:relative; right:-20px" class="text-muted">
                           <?php
-                          $ethereumPrice =  // assuming $ethereumPrice is defined somewhere
+                        //   $ethereumPrice =  // assuming $ethereumPrice is defined somewhere
                           $newethereum_result = $ethereumPrice * $row['updated_balance'];
                           echo '$' . number_format($newethereum_result);
                           ?>

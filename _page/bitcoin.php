@@ -77,7 +77,7 @@ $bitcoinPrice = $prices['bitcoin']['usd'] ?? $defaultPrices['bitcoin'];
     ?>
     <center>
         <div class="price">
-            <img src="./img/bitcoin.png" alt="bitcoin" width=55 height=55>
+            <img src="./img/bitcoin.png" alt="bitcoin" width=55 height=57>
             <h3 class="text-light pt-3"><?php echo $row ['bitcoin_balance'] ?> BTC</h3>
             <h5 class="text-light">
             $<?php

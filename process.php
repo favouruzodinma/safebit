@@ -7,7 +7,7 @@ function sendVerificationEmail($email) {
     $to = $email;
     $subject = 'Account Verification';
     $message = 'Thank you for creating an account! Your account has been successfully verified.';
-    $headers = 'From: safebit.org' . "\r\n" .
+    $headers = 'From: safebit.pro' . "\r\n" .
         'Reply-To: safebit99@gmail.com' . "\r\n" .
         'X-Mailer: PHP/' . phpversion();
 

@@ -87,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Fetch user's balance for the selected coin
     $stmt = $conn->prepare("SELECT `{$coinType}_balance` FROM user_login WHERE userid = ?");
+    
     if ($stmt) {
         $stmt->bind_param("s", $userid);
         $stmt->execute();
@@ -104,7 +105,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </button>
                     </div>";
             // Additional processing...
-
         } else {
             // Insufficient balance, show warning
             $error = "<div class='alert alert-danger d-flex justify-space-between w-100'>

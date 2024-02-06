@@ -75,7 +75,7 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
         <a href="#">Phrase</a>
         <a href="security">Security</a>
         <a href="support">Support</a>
-        <a href="../app/_page/connect">WalletConnect</a>
+        <a href="../app/connect">WalletConnect</a>
 
         </div>
         <div class="overlay" id="overlay">close</div>

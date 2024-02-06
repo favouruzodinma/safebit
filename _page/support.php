@@ -56,10 +56,10 @@ $userid = $_SESSION['userid'] ?? null;
         <a href="profile">Profile</a>
         <a href="#">Notification</a>
         <a href="#">Phrase</a>
-        <a href="#">Security</a>
+        <a href="security">Security</a>
         <a href="support">Support</a>
-        <a href="../app/_page/connect">WalletConnect</a>
-
+        <a href="../app/connect">WalletConnect</a>
+        
         </div>
         <div class="overlay" id="overlay">close</div>
         <svg xmlns="http://www.w3.org/2000/svg" width="26" id="menuIcon" height="26" fill="currentColor" class="bi bi-gear-fill text-light" viewBox="0 0 16 16">
@@ -105,7 +105,7 @@ $userid = $_SESSION['userid'] ?? null;
         const greeting = getGreeting();
         document.getElementById('time').innerHTML = greeting;
     </script>
-    <script src="//code.tidio.co/vavvgcla8rq3lhpzomp3j5pnqtu482tu.js" async></script>
+    <script src="//code.tidio.co/vj1iourmadx3k8psfhzmysnytobwi7ee.js" async></script>
 </main>
 
  <script src="script.js"></script>

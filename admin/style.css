@@ -1,0 +1,78 @@
+
+
+.ree {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 2px;
+}
+.ree > a{
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    border-radius: 50%;
+    border: solid white 1px;
+}
+.fourth{
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 72%;
+}
+li{
+    list-style-type: none;
+}
+a{
+   text-decoration: none !important;
+}
+.coin{
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+}
+.coin > .coinimg{
+    display: flex;
+}
+.coinimg > div{
+    padding-left:10px;
+}
+.coinimg > div > .name{
+    position: relative;
+    left: -15px;
+    font-size: 13px;
+}
+.coin small {
+    font-size: 12px;
+}
+.warning{
+    border-radius: 5px;
+    margin: 0 20px;
+    font-size: 14px;
+    background-color: rgba(255, 255, 0, 0.247) !important;
+}
+.price{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.namee{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    margin-bottom: 4%;
+    flex-direction: row;
+    font-size: 13px;
+}
+
+
+
+
+  
