@@ -74,9 +74,10 @@
     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">PAYMENTS</h6>
-            <a class="collapse-item" href="javascrip:void(0)">PENDING PAYMENT</a>
-            <a class="collapse-item" href="javascrip:void(0)">APPROVED PAYMENT</a>
-            <a class="collapse-item" href="javascrip:void(0)">DECLINED PAYMENT</a>
+            <a class="collapse-item" href="payments">All PAYMENT</a>
+            <a class="collapse-item" href="payments?status=pending">PENDING PAYMENT</a>
+            <a class="collapse-item" href="payments?status=approved">APPROVED PAYMENT</a>
+            <a class="collapse-item" href="payments?status=declined">DECLINED PAYMENT</a>
         </div>
     </div>
 </li>

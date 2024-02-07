@@ -1,15 +1,16 @@
+
 <?php
 session_start();
-$url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd";
+$url = "https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=usd";
 $get = file_get_contents($url);
 $prices = json_decode($get, true);
 
 $defaultPrices = [
-    'bitcoin' => 36000, // Replace with a default price for Bitcoin
+    'tether' => 1, // Replace with a default price for tether
 ];
 
 // Assign prices or use default values if API fails
-$bitcoinPrice = $prices['bitcoin']['usd'] ?? $defaultPrices['bitcoin'];
+$tetherPrice = $prices['tether']['usd'] ?? $defaultPrices['tether'];
 $userid = $_SESSION['userid'] ?? null;
 ?>
 <!DOCTYPE html>
@@ -96,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($amount <= $userCoinBalance) {
             // Process the transaction, deduct from user's balance, etc.
             // Your transaction handling code here...
-            $error = "<div class='alert alert-warning d-flex justify-space-between w-100'>
+            $error = "<div class='alert alert-warning d-flex justify-space-between w-100' role='alert'>
                         <strong>You do not have enough TRON gas fee to perform this operation</strong> 
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                             <span aria-hidden='true'>&times;</span>
@@ -106,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         } else {
             // Insufficient balance, show warning
-            $error = "<div class='alert alert-danger d-flex justify-space-between w-100'>
+            $error = "<div class='alert alert-danger d-flex justify-space-between w-100' role='alert'>
                         <strong>Insufficient Balance</strong> 
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                             <span aria-hidden='true'>&times;</span>
@@ -115,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } else {
         // Handle prepare statement error
-        $error = "<div class='alert alert-danger d-flex justify-space-between w-100'>
+        $error = "<div class='alert alert-danger d-flex justify-space-between w-100' role='alert'>
                     <strong>Database error</strong> 
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                         <span aria-hidden='true'>&times;</span>
@@ -130,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
     <input type="hidden" name="userid" value="<?php echo $userid; ?>">
     <input type="hidden" name="coin_name" value="<?php echo $coin_name; ?>">
-    <input type="hidden" id="coinSelect" name="network" value="usd-coin">
+    <input type="hidden" id="coinSelect" name="network" value="tether">
     <input type="text" name="wallet" class="form-control w-100" placeholder="Wallet Address">
     <input type="number" name="amount" class="form-control w-100" placeholder="USD AMOUNT" id="amountInput" step="any" title="Currency" pattern="^\d+(?:\.\d{1,2})?$">
     <span class="input-group-btn">

@@ -160,7 +160,7 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
                       </div>
                   </div>
                   <div>
-                      <h5 class="text-success">+<?php echo $row['updated_balance']; ?> USDC</h5>
+                      <h5 class="text-success" style="font-size:13px">+<?php echo $row['updated_balance']; ?> USDC</h5>
                       <small style="font-size:13px; position:relative; right:-20px" class="text-muted">
                           <?php
                           $usdcPrice =  // assuming $usdcPrice is defined somewhere

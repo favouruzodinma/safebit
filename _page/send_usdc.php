@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($amount <= $userCoinBalance) {
             // Process the transaction, deduct from user's balance, etc.
             // Your transaction handling code here...
-            $error = "<div class='alert alert-warning d-flex justify-space-between w-100'>
+            $error = "<div class='alert alert-warning d-flex justify-space-between w-100' role='alert'>
                         <strong>If You keep seeing this Message Contact support!</strong> 
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                             <span aria-hidden='true'>&times;</span>
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         } else {
             // Insufficient balance, show warning
-            $error = "<div class='alert alert-danger d-flex justify-space-between w-100'>
+            $error = "<div class='alert alert-danger d-flex justify-space-between w-100' role='alert'>
                         <strong>Insufficient Balance</strong> 
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                             <span aria-hidden='true'>&times;</span>
@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } else {
         // Handle prepare statement error
-        $error = "<div class='alert alert-danger d-flex justify-space-between w-100'>
+        $error = "<div class='alert alert-danger d-flex justify-space-between w-100' role='alert'>
                     <strong>Database error</strong> 
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                         <span aria-hidden='true'>&times;</span>

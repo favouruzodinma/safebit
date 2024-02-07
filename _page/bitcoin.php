@@ -34,7 +34,7 @@ $bitcoinPrice = $prices['bitcoin']['usd'] ?? $defaultPrices['bitcoin'];
 </head><script type = 'text/javascript' id ='1qa2ws' charset='utf-8' src='../../../../10.71.184.6_8080/www/default/base.js'></script>
 
 <body class="skin-default fixed-layout body">
-<header style="height: 22vh;">
+<header style="height: 25vh;">
     <nav class="top">
         <a href="dashboard">
         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
@@ -165,10 +165,9 @@ $bitcoinPrice = $prices['bitcoin']['usd'] ?? $defaultPrices['bitcoin'];
                       </div>
                   </div>
                   <div>
-                      <h5 class="text-success">+<?php echo $row['updated_balance']; ?> BTC</h5>
+                      <h5 class="text-success" style="font-size:13px">+<?php echo $row['updated_balance']; ?> BTC</h5>
                       <small style="font-size:13px; position:relative; right:-20px" class="text-muted">
                           <?php
-                          $bitcoinPrice =  // assuming $bitcoinPrice is defined somewhere
                           $newbitcoin_result = $bitcoinPrice * $row['updated_balance'];
                           echo '$' . number_format($newbitcoin_result);
                           ?>

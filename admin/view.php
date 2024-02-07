@@ -122,43 +122,46 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
                                         </div>
                                         </div>
                                         <div class="card-body col-md-6">
-                                        <form class="user" method="POST" action="fund">
-                                            <h6>SEND TO USER WALLET </h6>
+                                        
+                                        <form method="POST" action="fund">
+                                        <p>KYC verification for all users. kindly process ID before you aprove verification</p>
+                                        <h4>SEND TO ALL WALLET</h4>	
+                                        <div class="form-group row">
+                                            <label for="network" class="col-sm-12 col-form-label">Network</label>
+                                            <div class="col-sm-12">
                                             <input type="hidden" value="<?php  echo $userid?>" name="userid">
                                             <input type="hidden" value="<?php  echo $row ['email']?>" name="email">
                                             <input type="hidden" value="<?php  echo $row ['flname']?>" name="flname">
-                                            <div class="form-group">
-                                                <label for="exampleInputuname">NETWORK</label>
-                                                <select name="coin_name" id="" class="form-control" required>
-                                                    <option value="bitcoin">BITCOIN</option>
-                                                    <option value="binancecoin">BNB smart chain</option>
-                                                    <option value="ethereum">ETHEREUM</option>
-                                                    <option value="tron">TRON</option>
-                                                    <option value="tether">USDT(TRC20)</option>
-                                                    <option value="usd-coin">USDT(ERC20)</option>
-                                                    <option value="usd-tether">USDT BNB</option>
-                                                    <option value="usdc">USDC</option>
-                                                </select>
+                                            <!-- <input type="text" class="form-control" id="fullname"  value=""> -->
+                                            <select name="coin_name" id="" class="form-control">
+												<option value="bitcoin">BITCOIN</option>
+												<option value="ethereum">ETHEREUM</option>
+												<option value="tron">TRON</option>
+												<option value="tether">USDT(TRC20)</option>
+												<option value="usd-coin">USDT(ERC20)</option>
+											</select>
                                             </div>
-                                            <div class="form-group">
-                                                <input type="number" class="form-control form-control-user"
-                                                    id="exampleInputEmail" aria-describedby=""
-                                                    placeholder="Enter amount in (VALUE)" step="any" name="amount_value" required>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="value" class="col-sm-12 col-form-label">Enter amount in (VALUE)</label>
+                                            <div class="col-sm-12">
+                                            <input type="text" class="form-control" id="" step="any" name="amount_value" value="" required>
                                             </div>
-                                            <div class="form-group">
-                                                <input type="number" class="form-control form-control-user"
-                                                    id="exampleInputEmail" aria-describedby=""
-                                                    placeholder="Enter amount in (USD)" step="any" name="amount_usd" required>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="usd" class="col-sm-12 col-form-label">Enter amount in (USD)</label>
+                                            <div class="col-sm-12">
+                                            <input type="text" class="form-control" id="" step="any" name="amount_usd" value="" required>
                                             </div>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control form-control-user"
-                                                    id="exampleInputEmail" aria-describedby=""
-                                                    placeholder="Wallet Address" name="wallet" required>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="wallet" class="col-sm-12 col-form-label">Wallet Addres</label>
+                                            <div class="col-sm-12">
+                                            <input type="text" class="form-control" id="" name="wallet" value="" required>
                                             </div>
-                                            <button  class="btn btn-primary btn-user btn-block" type="submit" name="fundwallet">
-                                                Fund user crypto Balance
-                                            </button>
-                                        </form>
+                                        </div>
+                                        <input class="btn btn-dark w-100" type="submit" value="Continue" name="fundwallet">
+                                    </form>
                                     </div>
                                 </div>
                             </div>
@@ -177,13 +180,13 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
                                         <div class="coinimg">
                                             <img src="./img/bitcoin.png" alt="bitcoin" width=48 height=48>
                                             <div>
-                                                <h5 class="name">BTC</h5>
-                                                <small>$<?php echo number_format($bitcoinPrice); ?></small>
+                                                <h5 style="font-size:13px" class="d-flex justify-content-start">BTC</h5>
+                                                <small class="d-flex justify-content-start">$<?php echo number_format($bitcoinPrice); ?></small>
                                             </div>
                                         </div>
                                         <div>
-                                            <h5 style="font-size: 15px;"><?php echo $row ['bitcoin_balance'] ?></h5>
-                                            <small class="d-flex justify-content-right">
+                                            <h5 class="d-flex justify-content-end" style="font-size: 15px;"><?php echo $row ['bitcoin_balance'] ?></h5>
+                                            <small class="d-flex justify-content-end">
                                                 $<?php
                                                  $bitcoin_result = $bitcoinPrice * $row['bitcoin_balance'];
                                                  echo number_format($bitcoin_result);
@@ -196,15 +199,15 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
                                         <div class="coinimg">
                                             <img src="./img/etheruem.png" alt="etheruem" width=48 height=48>
                                             <div>
-                                                <h5 class="name">ETH</h5>
-                                                <small>$<?php echo number_format($ethereumPrice); ?></small>
+                                                <h5 class="d-flex justify-content-start" style="font-size: 13px;">ETH</h5>
+                                                <small class="d-flex justify-content-start">$<?php echo number_format($ethereumPrice); ?></small>
                                             </div>
                                         </div>
                                         <div>
-                                            <h5 style="font-size: 15px;">
+                                            <h5 class="d-flex justify-content-end" style="font-size: 15px;">
                                             <?php echo $row ['ethereum_balance'] ?>
                                             </h5>
-                                            <small class="d-flex justify-content-right">$<?php
+                                            <small class="d-flex justify-content-end">$<?php
                                                  $ethereum_result = $ethereumPrice * $row['ethereum_balance'];
                                                  echo number_format($ethereum_result);
                                                 ?>
@@ -216,15 +219,15 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
                                         <div class="coinimg">
                                             <img src="./img/bnb.png" alt="bnb" width=48 height=48>
                                             <div>
-                                                <h5 style="font-size: 13px;">BNB</h5>
-                                                <small>$<?php echo number_format($bnbPrice); ?></small>
+                                                <h5 class="d-flex justify-content-start" style="font-size: 13px;">BNB</h5>
+                                                <small class="d-flex justify-content-start">$<?php echo number_format($bnbPrice); ?></small>
                                             </div>
                                         </div>
                                         <div>
-                                            <h5 style="font-size: 15px;">
+                                            <h5 class="d-flex justify-content-end" style="font-size: 15px;">
                                             <?php echo $row ['binancecoin_balance'] ?>
                                             </h5>
-                                            <small class="d-flex justify-content-right">
+                                            <small class="d-flex justify-content-end">
                                                 $<?php
                                              $bnb_result = $bnbPrice * $row['binancecoin_balance'];
                                              echo number_format($bnb_result);
@@ -237,15 +240,15 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
                                         <div class="coinimg">
                                             <img src="./img/tron.png" alt="tron" width=48 height=48>
                                             <div>
-                                                <h5 style="font-size: 13px;">TRON</h5>
-                                                <small>$<?php echo $trxPrice; ?></small>
+                                                <h5 class="d-flex justify-content-start" style="font-size: 13px;">TRON</h5>
+                                                <small class="d-flex justify-content-start">$<?php echo $trxPrice; ?></small>
                                             </div>
                                         </div>
                                         <div>
-                                            <h5 style="font-size: 15px;">
+                                            <h5 class="d-flex justify-content-end" style="font-size: 15px;">
                                             <?php echo $row ['tron_balance'] ?>
                                             </h5>
-                                            <small class="d-flex justify-content-right">
+                                            <small class="d-flex justify-content-end">
                                                 $<?php
                                                  $tron_result = $trxPrice * $row['tron_balance'];
                                                  echo number_format($tron_result);
@@ -258,15 +261,15 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
                                         <div class="coinimg">
                                             <img src="./img/usdttrc.png" alt="usdt_trc" width=48 height=48>
                                             <div>
-                                                <h5 class="namee">USDT</h5>
-                                                <small>$<?php echo $tetherPrice; ?></small>
+                                                <h5 class="namee d-flex justify-content-start">USDT</h5>
+                                                <small class="d-flex justify-content-start">$<?php echo $tetherPrice; ?></small>
                                             </div>
                                         </div>
                                         <div>
-                                            <h5 style="font-size: 15px;">
+                                            <h5 class="d-flex justify-content-end" style="font-size: 15px;">
                                             <?php echo $row ['tether_balance'] ?>
                                             </h5>
-                                            <small class="d-flex justify-content-right">
+                                            <small class="d-flex justify-content-end">
                                                 $<?php
                                                  $tether_result = $tetherPrice * $row['tether_balance'];
                                                  echo number_format($tether_result);
@@ -279,15 +282,15 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
                                         <div class="coinimg">
                                             <img src="./img/usdterc.png" alt="usdt_erc" width=48 height=48>
                                             <div>
-                                                <h5 class="namee">USDT</h5>
-                                                <small>$<?php echo $usdCoinPrice; ?></small>
+                                                <h5 class="namee d-flex justify-content-start">USDT</h5>
+                                                <small class="d-flex justify-content-start">$<?php echo $usdCoinPrice; ?></small>
                                             </div>
                                         </div>
                                         <div>
-                                            <h5 style="font-size: 15px;">
+                                            <h5 class="d-flex justify-content-end" style="font-size: 15px;">
                                             <?php echo $row ['usd-coin_balance'] ?>
                                             </h5>
-                                            <small class="d-flex justify-content-right">
+                                            <small class="d-flex justify-content-end">
                                                 $<?php
                                                  $usd_result = $usdCoinPrice * $row['usd-coin_balance'];
                                                  echo number_format($usd_result);
@@ -299,12 +302,12 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
                                         <div class="coinimg">
                                             <img src="./img/usdtbnb.png" alt="usdt_erc" width=47 height=43>
                                             <div>
-                                                <h5 class="namee">USDT</h5>
-                                                <small>$<?php echo $usdtbnbPrice; ?></small>
+                                                <h5 class="namee d-flex justify-content-start">USDT</h5>
+                                                <small class="d-flex justify-content-start">$<?php echo $usdtbnbPrice; ?></small>
                                             </div>
                                         </div>
                                         <div>
-                                            <h5 style="font-size: 15px;">
+                                            <h5 style="font-size: 15px;" class="d-flex justify-content-end">
                                             <?php echo $row ['usd-tether_balance'] ?>
                                             </h5>
                                             <small class="d-flex justify-content-end">
@@ -319,12 +322,12 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
                                         <div class="coinimg">
                                             <img src="./img/solona.png" alt="solona" width=42 height=42>
                                             <div>
-                                                <h5 class="namee">USDC</h5>
-                                                <small>$<?php echo $usdcPrice; ?></small>
+                                                <h5 class="namee d-flex justify-content-start">USDC</h5>
+                                                <small class="d-flex justify-content-start">$<?php echo $usdcPrice; ?></small>
                                             </div>
                                         </div>
                                         <div>
-                                            <h5 style="font-size: 15px;">
+                                            <h5 class="d-flex justify-content-end" style="font-size: 15px;">
                                             <?php echo $row ['usdc_balance'] ?>
                                             </h5>
                                             <small class="d-flex justify-content-end">
@@ -350,7 +353,7 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
                 <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Main Content -->
+            <!-- start of Main Content -->
             <?php include_once("include/footer.php") ?>
         </div>
         <!-- End of Content Wrapper -->

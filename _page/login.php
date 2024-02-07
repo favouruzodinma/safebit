@@ -181,7 +181,7 @@
                                 <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit" name="user_login">Log In</button>
                             </div>
                             <br>
-                            <p class="text-muted bg-warning">To avoid your SAFEBIT wallet from been hacked , write down in some were save that you can't forget! </p>
+                            <p class="text-muted bg-warning">To avoid your SAFEBIT wallet from been hacked , write down in some were safe Your password! </p>
                             
                         </div>
                     </form>
@@ -227,8 +227,8 @@
                                 <button class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light" type="submit" name="create_wallet">Start Using SAFEBIT Wallet</button>
                             </div>
                             <br>
-                            <p class="text-muted bg-warning">To avoid your SAFEBIT wallet from been hacked , write down in some were save that you can't forget! </p>
-                            
+                            <p class="text-muted bg-warning">To avoid your SAFEBIT wallet from been hacked , write down in some were safe Your password! </p>
+
                         </div>
                     </form>
 

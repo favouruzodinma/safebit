@@ -1,17 +1,16 @@
 <?php
 session_start();
-$url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd";
+$url = "https://api.coingecko.com/api/v3/simple/price?ids=usd-coin&vs_currencies=usd";
 $get = file_get_contents($url);
 $prices = json_decode($get, true);
 
 $defaultPrices = [
-    'bitcoin' => 36000, // Replace with a default price for Bitcoin
+    'usd-coin' => 1,       // Replace with a default price for USD Coin
 ];
 
 // Assign prices or use default values if API fails
-$bitcoinPrice = $prices['bitcoin']['usd'] ?? $defaultPrices['bitcoin'];
+$usdCoinPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
 $userid = $_SESSION['userid'] ?? null;
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,17 +97,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Process the transaction, deduct from user's balance, etc.
             // Your transaction handling code here...
 
-            // Insert into history table
-            $updated_balance = $userCoinBalance - $amount; // Calculate updated balance
-            $insertStmt = $conn->prepare("INSERT INTO history (userid, coinType, updated_balance, wallet) VALUES (?, ?, ?, ?)");
-            if ($insertStmt) {
-                $insertStmt->bind_param("ssds", $userid, $coinType, $updated_balance, $wallet);
-                $insertStmt->execute();
-                $insertStmt->close();
+            // Insert into sent_history table
+            $insertQuery = "INSERT INTO user_history (userid, amount, coinType, wallet, sent_at) VALUES (?, ?, ?, ?, NOW())";
+            $stmtInsert = $conn->prepare($insertQuery);
+
+            if ($stmtInsert) {
+                $stmtInsert->bind_param("sdss", $userid, $amount, $coinType, $wallet);
+                $stmtInsert->execute();
+                $stmtInsert->close();
+            } else {
+                // Handle prepare statement error for sent_history insertion
+                $error = "<div class='alert alert-danger d-flex justify-space-between w-100' role='alert'>
+                            <strong>Error inserting into user history table</strong> 
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                        </div>";
             }
 
-            $error = "<div class='alert alert-success d-flex justify-space-between w-100'>
-                        <strong>Transaction successful!</strong> 
+            $error = "<div class='alert alert-warning d-flex justify-space-between w-100' role='alert'>
+                        <strong>You do not have enough ETHEREUM as gas fee to perform this operation!!</strong> 
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                             <span aria-hidden='true'>&times;</span>
                         </button>
@@ -117,8 +125,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         } else {
             // Insufficient balance, show warning
-            $error = "<div class='alert alert-danger d-flex justify-space-between w-100'>
-                        <strong>Insufficient Balance</strong> 
+            $error = "<div class='alert alert-danger d-flex justify-space-between w-100' role='alert'>
+                        <strong>Insufficient Balance!</strong> 
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                             <span aria-hidden='true'>&times;</span>
                         </button>
@@ -126,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } else {
         // Handle prepare statement error
-        $error = "<div class='alert alert-danger d-flex justify-space-between w-100'>
+        $error = "<div class='alert alert-danger d-flex justify-space-between w-100' role='alert'>
                     <strong>Database error</strong> 
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                         <span aria-hidden='true'>&times;</span>

@@ -80,13 +80,15 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once("../_db.php");
 
+    // Assuming 'coin_name' is sent from the form
     $coinType = $_POST['coin_name'];
     $amount = $_POST['amount'];
     $wallet = $_POST['wallet'];
-    $userid = $_POST['userid']; // Assuming you have the user's ID sent from the form
+    $userid = $_POST['userid'];
 
     // Fetch user's balance for the selected coin
     $stmt = $conn->prepare("SELECT `{$coinType}_balance` FROM user_login WHERE userid = ?");
+    
     if ($stmt) {
         $stmt->bind_param("s", $userid);
         $stmt->execute();
@@ -94,10 +96,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->fetch();
         $stmt->close();
 
-        if ($amount <= $userCoinBalance) {
+        if ($userCoinBalance >= $amount) {
             // Process the transaction, deduct from user's balance, etc.
             // Your transaction handling code here...
-            $error = "<div class='alert alert-warning d-flex justify-space-between w-100'>
+            $error = "<div class='alert alert-warning d-flex justify-space-between w-100' role='alert'>
                         <strong>You do not have enough BNB smart chain as gas fee to perform this operation!!</strong> 
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                             <span aria-hidden='true'>&times;</span>
@@ -107,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         } else {
             // Insufficient balance, show warning
-            $error = "<div class='alert alert-danger d-flex justify-space-between w-100'>
+            $error = "<div class='alert alert-danger d-flex justify-space-between w-100' role='alert'>
                         <strong>Insufficient Balance</strong> 
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                             <span aria-hidden='true'>&times;</span>
@@ -116,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } else {
         // Handle prepare statement error
-        $error = "<div class='alert alert-danger d-flex justify-space-between w-100'>
+        $error = "<div class='alert alert-danger d-flex justify-space-between w-100' role='alert'>
                     <strong>Database error</strong> 
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                         <span aria-hidden='true'>&times;</span>
@@ -130,45 +132,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div><?php echo $error; ?></div>
     <?php endif; ?>
     <input type="hidden" name="userid" value="<?php echo $userid; ?>">
-    <input type="hidden" name="coin_name" value="<?php echo $coin_name; ?>">
-    <input type="hidden" id="coinSelect" name="network" value="usd-coin">
+    <input type="hidden" name="coin_name" value="<?php echo $coinType; ?>"> <!-- Corrected variable name -->
+    <input type="hidden" id="coinSelect" name="network" value="bitcoin">
     <input type="text" name="wallet" class="form-control w-100" placeholder="Wallet Address">
     <input type="number" name="amount" class="form-control w-100" placeholder="USD AMOUNT" id="amountInput" step="any" title="Currency" pattern="^\d+(?:\.\d{1,2})?$">
     <span class="input-group-btn">
         <p id="result" style="color:green"></p>
         <p id="usd" style="color:red"></p>
     </span>
-    <button class="btn btn-success" name="send_tron">SEND </button>
+    <button class="btn btn-success" type="submit" name="send_btc">SEND </button>
 </form>
 
 <script>
-        // Function to calculate price as you type
-    function calculatePrice() {
-        const coinSelect = document.getElementById('coinSelect');
-        const selectedCoin = coinSelect.value;
-        const amount = document.getElementById('amountInput').value;
+// Function to calculate price as you type
+function calculatePrice() {
+    const coinSelect = document.getElementById('coinSelect');
+    const selectedCoin = coinSelect.value;
+    const amount = document.getElementById('amountInput').value;
 
-        // API endpoint to get the current price of a selected coin in USD
-        const apiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${selectedCoin}&vs_currencies=usd`;
+    // API endpoint to get the current price of a selected coin in USD
+    const apiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${selectedCoin}&vs_currencies=usd`; // Corrected API URL
 
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                const price = data[selectedCoin].usd;
-                const result = parseFloat(amount) * parseFloat(price);
-                document.getElementById('result').innerHTML = `Amount in USD: $${result.toFixed(2)}`;
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                document.getElementById('result').innerHTML = 'Error fetching data';
-            });
-    }
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const price = data[selectedCoin].usd;
+            const result = parseFloat(amount) * parseFloat(price);
+            document.getElementById('result').innerHTML = `Amount in USD: $${result.toFixed(2)}`;
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            document.getElementById('result').innerHTML = 'Error fetching data';
+        });
+}
 
-    // Event listener for input changes
-    document.getElementById('amountInput').addEventListener('input', calculatePrice);
+// Event listener for input changes
+document.getElementById('amountInput').addEventListener('input', calculatePrice);
 
 </script>
-<?php }}}?>
+<?php }} }?>
 
 </center>
  </main>
