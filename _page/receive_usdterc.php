@@ -50,7 +50,7 @@
             <h3 class="text-light pt-3">USDT</h3>
             <sup class="bg-dark" style="font-size:12px; background-color:blue"><small class="text-muted">COIN</small></sup> 
         </div>
-        <img src="img/usdt-barcode.jpeg" alt="usdterc scan image" width=200 height=200 />
+        <img src="img/usdt_erc.jpg" alt="usdterc scan image" width=200 height=200 />
     </center>
     <br>
  </main>

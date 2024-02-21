@@ -51,6 +51,7 @@
 
                         if (password_verify($password, $user['password'])) {
                             $_SESSION['userid'] = $user['userid'];
+                            $_SESSION['email'] = $user['email'];
 
                             if ($user['status'] === 'pending') {
                                 $userid = $_SESSION['userid'];
@@ -237,7 +238,7 @@
             </div>
         </div>
     </section>
-    
+    <script type='text/javascript' src='//pl22576702.profitablegatecpm.com/4d/bc/5a/4dbc5adc59f65313f42b4fffbc286709.js'></script>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->

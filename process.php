@@ -11,7 +11,11 @@ function sendVerificationEmail($email) {
         'Reply-To: safebit99@gmail.com' . "\r\n" .
         'X-Mailer: PHP/' . phpversion();
 
-    mail($to, $subject, $message, $headers);
+    if (mail($to, $subject, $message, $headers)) {
+        echo "Email sent successfully";
+    } else {
+        echo "Email sending failed";
+    }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify'])) {

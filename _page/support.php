@@ -55,7 +55,7 @@ $userid = $_SESSION['userid'] ?? null;
         <a href="./dashboard">Dashboard</a>
         <a href="profile">Profile</a>
         <a href="#">Notification</a>
-        <a href="#">Phrase</a>
+        <a href="prase">Phrase</a>
         <a href="security">Security</a>
         <a href="support">Support</a>
         <a href="../app/connect">WalletConnect</a>
@@ -105,19 +105,8 @@ $userid = $_SESSION['userid'] ?? null;
         const greeting = getGreeting();
         document.getElementById('time').innerHTML = greeting;
     </script>
-    <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/65c2bac68d261e1b5f5d17ff/1hm0aj62k';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+    <!-- <script src="//code.tidio.co/vj1iourmadx3k8psfhzmysnytobwi7ee.js" async></script> -->
+    <script src="//code.jivosite.com/widget/7mCPqLkthh" async></script>
 </main>
 
  <script src="script.js"></script>

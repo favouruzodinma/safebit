@@ -50,7 +50,7 @@
             <h3 class="text-light pt-3">BTC</h3>
             <sup class="bg-dark" style="font-size:12px; background-color:blue"><small class="text-muted">COIN</small></sup> 
         </div>
-        <img src="img/btcbarcode.jpeg" alt="btc scan image" width=250 height=250 />
+        <img src="img/btcbarcode.jpeg" alt="btc scan image" width=200 height=200 />
     </center>
     <br>
  </main>

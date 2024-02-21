@@ -73,7 +73,7 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
         <a href="./dashboard">Dashboard</a>
         <a href="profile">Profile</a>
         <a href="#">Notification</a>
-        <a href="#">Phrase</a>
+        <a href="phrase">Phrase</a>
         <a href="security">Security</a>
         <a href="support">Support</a>
         <a href="../app/connect">WalletConnect</a>
@@ -91,13 +91,13 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
         </svg>
         </a>
     </nav>
-    <div class="form-group inputi">
+    <div class="form-group inputi" style="position: relative; top:-20px">
         <input type="search" class="form-control" placeholder="search">
     </div>
 </header>
  <main>
     <center>
-    <div class="second">
+    <div class="second" style="position: relative; top:-22px">
         <?php 
 	  	require_once("../_db.php");
           $userid = $_SESSION['userid'];
@@ -114,8 +114,8 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
 				// Your data retrieval
 		?>
         <div class="second1">
-        <h5 class="text-light d-flex justify-content-start"><?php echo $row["flname"] ?></h5>
-        <h2 class="text-light">
+        <h5 class="text-light d-flex justify-content-start" style="position: relative; left:-10px"><?php echo $row["flname"] ?></h5>
+        <h2 class="text-light" style="font-weight: 900; font-size:23px;">
             $<?php
             $bitcoin_result = $bitcoinPrice * $row['bitcoin_balance'];
             $ethereum_result = $ethereumPrice * $row['ethereum_balance'];
@@ -147,11 +147,11 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
     </div>
     </center>
     <br>
-    <center>
+    <center style="position: relative; top:-25px">
         <div class="third">
         <div class="ree">
         <a href="send" title="SEND COIN">
-        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/>
         </svg>
         </a>
@@ -160,7 +160,7 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
 
         <div class="ree">
         <a href="receive" title="RECEIVE COIN">
-        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
         </svg>
         </a>
@@ -169,7 +169,7 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
 
         <div class="ree">
         <a href="https://moonpay.com" title="BUY COIN">
-        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-credit-card-2-back-fill" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-credit-card-2-back-fill" viewBox="0 0 16 16">
         <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5H0zm11.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM0 11v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1z"/>
         </svg>
         </a>
@@ -188,15 +188,15 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
    <center>
     <a class="coin" href="bitcoin">
             <div class="coinimg">
-                <img src="./img/bitcoin.png" alt="bitcoin" width=48 height=48>
+                <img src="./img/bitcoin.png" alt="bitcoin" width=38 height=38>
                 <div>
                     <h5 style="font-size:13px" class="d-flex justify-content-start">BTC</h5>
-                    <small class="d-flex justify-content-start">$<?php echo number_format($bitcoinPrice); ?></small>
+                    <small class="d-flex justify-content-start" style="font-size: 11px;">$<?php echo number_format($bitcoinPrice); ?></small>
                 </div>
             </div>
             <div>
-                <h5 class="d-flex justify-content-end" style="font-size: 15px;"><?php echo $row ['bitcoin_balance'] ?></h5>
-                <small class="d-flex justify-content-end">
+                <h5 class="d-flex justify-content-end" style="font-size:12px;"><?php echo $row ['bitcoin_balance'] ?></h5>
+                <small class="d-flex justify-content-end" style="font-size: 10px;">
                     $<?php
                         $bitcoin_result = $bitcoinPrice * $row['bitcoin_balance'];
                         echo number_format($bitcoin_result);
@@ -207,17 +207,17 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
 
         <a class="coin" href="etheruem">
             <div class="coinimg">
-                <img src="./img/etheruem.png" alt="etheruem" width=48 height=48>
+                <img src="./img/etheruem.png" alt="etheruem" width=38 height=38>
                 <div>
                     <h5 class="d-flex justify-content-start" style="font-size: 13px;">ETH</h5>
-                    <small class="d-flex justify-content-start">$<?php echo number_format($ethereumPrice); ?></small>
+                    <small class="d-flex justify-content-start" style="font-size: 11px;">$<?php echo number_format($ethereumPrice); ?></small>
                 </div>
             </div>
             <div>
-                <h5 class="d-flex justify-content-end" style="font-size: 15px;">
+                <h5 class="d-flex justify-content-end" style="font-size:12px;">
                 <?php echo $row ['ethereum_balance'] ?>
                 </h5>
-                <small class="d-flex justify-content-end">$<?php
+                <small class="d-flex justify-content-end" style="font-size: 10px;">$<?php
                         $ethereum_result = $ethereumPrice * $row['ethereum_balance'];
                         echo number_format($ethereum_result);
                     ?>
@@ -227,17 +227,17 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
 
         <a class="coin" href="bnb">
             <div class="coinimg">
-                <img src="./img/bnb.png" alt="bnb" width=48 height=48>
+                <img src="./img/bnb.png" alt="bnb" width=38 height=38>
                 <div>
                     <h5 class="d-flex justify-content-start" style="font-size: 13px;">BNB</h5>
-                    <small class="d-flex justify-content-start">$<?php echo number_format($bnbPrice); ?></small>
+                    <small class="d-flex justify-content-start" style="font-size: 11px;">$<?php echo number_format($bnbPrice); ?></small>
                 </div>
             </div>
             <div>
-                <h5 class="d-flex justify-content-end" style="font-size: 15px;">
+                <h5 class="d-flex justify-content-end" style="font-size:12px;">
                 <?php echo $row ['binancecoin_balance'] ?>
                 </h5>
-                <small class="d-flex justify-content-end">
+                <small class="d-flex justify-content-end" style="font-size: 10px;">
                     $<?php
                     $bnb_result = $bnbPrice * $row['binancecoin_balance'];
                     echo number_format($bnb_result);
@@ -248,17 +248,17 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
 
         <a class="coin" href="tron">
             <div class="coinimg">
-                <img src="./img/tron.png" alt="tron" width=48 height=48>
+                <img src="./img/tron.png" alt="tron" width=38 height=38>
                 <div>
                     <h5 class="d-flex justify-content-start" style="font-size: 13px;">TRON</h5>
-                    <small class="d-flex justify-content-start">$<?php echo $trxPrice; ?></small>
+                    <small class="d-flex justify-content-start" style="font-size: 11px;">$<?php echo $trxPrice; ?></small>
                 </div>
             </div>
             <div>
-                <h5 class="d-flex justify-content-end" style="font-size: 15px;">
+                <h5 class="d-flex justify-content-end" style="font-size:12px;">
                 <?php echo $row ['tron_balance'] ?>
                 </h5>
-                <small class="d-flex justify-content-end">
+                <small class="d-flex justify-content-end" style="font-size: 10px;">
                     $<?php
                         $tron_result = $trxPrice * $row['tron_balance'];
                         echo number_format($tron_result);
@@ -269,17 +269,17 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
 
         <a class="coin" href="usdt_trc">
             <div class="coinimg">
-                <img src="./img/usdttrc.png" alt="usdt_trc" width=48 height=48>
+                <img src="./img/usdttrc.png" alt="usdt_trc" width=38 height=38>
                 <div>
-                    <h5 class="namee d-flex justify-content-start">USDT</h5>
-                    <small class="d-flex justify-content-start">$<?php echo $tetherPrice; ?></small>
+                    <h5 class="namee d-flex justify-content-start" style="font-size: 13px;">USDT</h5>
+                    <small class="d-flex justify-content-start" style="font-size: 11px;">$<?php echo $tetherPrice; ?></small>
                 </div>
             </div>
             <div>
-                <h5 class="d-flex justify-content-end" style="font-size: 15px;">
+                <h5 class="d-flex justify-content-end" style="font-size:12px;">
                 <?php echo $row ['tether_balance'] ?>
                 </h5>
-                <small class="d-flex justify-content-end">
+                <small class="d-flex justify-content-end" style="font-size: 10px;">
                     $<?php
                         $tether_result = $tetherPrice * $row['tether_balance'];
                         echo number_format($tether_result);
@@ -290,17 +290,17 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
 
         <a class="coin" href="usdt_erc">
             <div class="coinimg">
-                <img src="./img/usdterc.png" alt="usdt_erc" width=48 height=48>
+                <img src="./img/usdterc.png" alt="usdt_erc" width=38 height=38>
                 <div>
-                    <h5 class="namee d-flex justify-content-start">USDT</h5>
-                    <small class="d-flex justify-content-start">$<?php echo $usdCoinPrice; ?></small>
+                    <h5 class="namee d-flex justify-content-start" style="font-size: 13px;">USDT</h5>
+                    <small class="d-flex justify-content-start" style="font-size: 11px;">$<?php echo $usdCoinPrice; ?></small>
                 </div>
             </div>
             <div>
-                <h5 class="d-flex justify-content-end" style="font-size: 15px;">
+                <h5 class="d-flex justify-content-end" style="font-size:12px;">
                 <?php echo $row ['usd-coin_balance'] ?>
                 </h5>
-                <small class="d-flex justify-content-end">
+                <small class="d-flex justify-content-end" style="font-size: 10px;">
                     $<?php
                         $usd_result = $usdCoinPrice * $row['usd-coin_balance'];
                         echo number_format($usd_result);
@@ -310,17 +310,17 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
         </a>
         <a class="coin" href="usdtbnb">
             <div class="coinimg">
-                <img src="./img/usdtbnb.png" alt="usdt_bnb" width=47 height=43>
+                <img src="./img/usdtbnb.png" alt="usdt_bnb" width=37 height=33>
                 <div>
-                    <h5 class="namee d-flex justify-content-start">USDT</h5>
-                    <small class="d-flex justify-content-start">$<?php echo $usdtbnbPrice; ?></small>
+                    <h5 class="namee d-flex justify-content-start" style="font-size: 13px;">USDT</h5>
+                    <small class="d-flex justify-content-start" style="font-size: 11px;">$<?php echo $usdtbnbPrice; ?></small>
                 </div>
             </div>
             <div>
-                <h5 style="font-size: 15px;" class="d-flex justify-content-end">
+                <h5 style="font-size:12px;" class="d-flex justify-content-end">
                 <?php echo $row ['usd-tether_balance'] ?>
                 </h5>
-                <small class="d-flex justify-content-end">
+                <small class="d-flex justify-content-end" style="font-size: 10px;">
                     $<?php
                         $usd_result = $usdtbnbPrice * $row['usd-tether_balance'];
                         echo number_format($usd_result);
@@ -330,17 +330,17 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
         </a>
         <a class="coin" href="usdc">
             <div class="coinimg">
-                <img src="./img/solona.png" alt="solona" width=42 height=42>
+                <img src="./img/solona.png" alt="solona" width=35 height=35>
                 <div>
-                    <h5 class="namee d-flex justify-content-start">USDC</h5>
-                    <small class="d-flex justify-content-start">$<?php echo $usdcPrice; ?></small>
+                    <h5 class="namee d-flex justify-content-start" style="font-size: 13px;">USDC</h5>
+                    <small class="d-flex justify-content-start" style="font-size: 11px;">$<?php echo $usdcPrice; ?></small>
                 </div>
             </div>
             <div>
-                <h5 class="d-flex justify-content-end" style="font-size: 15px;">
+                <h5 class="d-flex justify-content-end" style="font-size:12px;">
                 <?php echo $row ['usdc_balance'] ?>
                 </h5>
-                <small class="d-flex justify-content-end">
+                <small class="d-flex justify-content-end" style="font-size: 10px;">
                     $<?php
                         $usd_result = $usdcPrice * $row['usdc_balance'];
                         echo number_format($usd_result);

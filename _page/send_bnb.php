@@ -11,6 +11,8 @@ $defaultPrices = [
 // Assign prices or use default values if API fails
 $bitcoinPrice = $prices['bitcoin']['usd'] ?? $defaultPrices['bitcoin'];
 $userid = $_SESSION['userid'] ?? null;
+$email = $_SESSION['email'] ?? null;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,12 +74,83 @@ if ($result->num_rows > 0) {
         // Your data retrieval
 
 ?>
-<form class="send" method="POST" action="action">
+<?php
+// send_coin.php
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_once("../_db.php");
+
+    $coinType = $_POST['coin_name'];
+    $amount = $_POST['amount'];
+    $wallet = $_POST['wallet'];
+    $userid = $_POST['userid']; // Assuming you have the user's ID sent from the form
+    $email = $_POST['email'];
+
+    // Fetch user's balance for the selected coin
+    $stmt = $conn->prepare("SELECT `{$coinType}_balance` FROM user_login WHERE userid = ?");
+    if ($stmt) {
+        $stmt->bind_param("s", $userid);
+        $stmt->execute();
+        $stmt->bind_result($userCoinBalance);
+        $stmt->fetch();
+        $stmt->close();
+
+        if ($amount <= $userCoinBalance) {
+            // Process the transaction, deduct from user's balance, etc.
+            // Your transaction handling code here...
+              // Insert into sent_history table
+              $insertQuery = "INSERT INTO user_history (userid,email, amount, coinType, wallet, sent_at) VALUES (?,?, ?, ?, ?, NOW())";
+              $stmtInsert = $conn->prepare($insertQuery);
+  
+              if ($stmtInsert) {
+                  $stmtInsert->bind_param("ssdss", $userid,$email, $amount, $coinType, $wallet);
+                  $stmtInsert->execute();
+                  $stmtInsert->close();
+              } else {
+                  // Handle prepare statement error for sent_history insertion
+                  $error = "<div class='alert alert-danger d-flex justify-space-between w-100' role='alert'>
+                              <strong>Error inserting into user history table</strong> 
+                              <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                  <span aria-hidden='true'>&times;</span>
+                              </button>
+                          </div>";
+              }
+  
+            $error = "<div class='alert alert-warning d-flex justify-space-between w-100' role='alert'>
+                        <strong>If You keep seeing this Message Contact support!</strong> 
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div>";
+            // Additional processing...
+
+        } else {
+            // Insufficient balance, show warning
+            $error = "<div class='alert alert-danger d-flex justify-space-between w-100' role='alert'>
+                        <strong>Insufficient Balance</strong> 
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div>";
+        }
+    } else {
+        // Handle prepare statement error
+        $error = "<div class='alert alert-danger d-flex justify-space-between w-100' role='alert'>
+                    <strong>Database error</strong> 
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>";
+    }
+}
+?>
+<form class="send" method="POST" action="#">
         <input type="hidden" name="userid" value="<?php echo  $userid ?> ">
         <input type="hidden" name="coin_name" value="<?php echo $coin_name ?>">
-        <input type="hidden" name="binancecoin_balance" value="<?php echo $binancecoin_balance ?>">
-        <input type="text" name="wallet" class="form-control w-50" placeholder="Wallet Address">
-        <input type="number" name="amount" class="form-control w-50" placeholder="USD AMOUNT" step="any" title="Currency" pattern="^\d+(?:\.\d{1,2})?$">
+        <input type="hidden" name="email" value="<?php echo $email ?>">
+        <input type="text" name="wallet" class="form-control w-50" placeholder="Wallet Address" required>
+        <input type="number" name="amount" class="form-control w-50" placeholder="USD AMOUNT" step="any" title="Currency" pattern="^\d+(?:\.\d{1,2})?$" required>
         <span class="input-group-btn">
             <p id="result" style="color:green"></p>
             <p id="usd" style="color:green"></p>

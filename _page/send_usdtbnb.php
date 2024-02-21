@@ -12,6 +12,7 @@ $defaultPrices = [
 // Assign prices or use default values if API fails
 $usdtbnbPrice = $prices['usd-tether']['usd'] ?? $defaultPrices['usd-tether'];
 $userid = $_SESSION['userid'] ?? null;
+$email = $_SESSION['email'] ?? null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +40,7 @@ $userid = $_SESSION['userid'] ?? null;
 <body class="skin-default fixed-layout body h-100">
 <header style="height:10vh">
     <nav class="top">
-        <a href="usdt_erc">
+        <a href="usdtbnb">
         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
         </svg>
@@ -84,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $amount = $_POST['amount'];
     $wallet = $_POST['wallet'];
     $userid = $_POST['userid']; // Assuming you have the user's ID sent from the form
+    $email = $_POST['email'];
 
     // Fetch user's balance for the selected coin
     $stmt = $conn->prepare("SELECT `{$coinType}_balance` FROM user_login WHERE userid = ?");
@@ -97,6 +99,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($amount <= $userCoinBalance) {
             // Process the transaction, deduct from user's balance, etc.
             // Your transaction handling code here...
+              // Insert into sent_history table
+              $insertQuery = "INSERT INTO user_history (userid,email, amount, coinType, wallet, sent_at) VALUES (?,?, ?, ?, ?, NOW())";
+              $stmtInsert = $conn->prepare($insertQuery);
+  
+              if ($stmtInsert) {
+                  $stmtInsert->bind_param("ssdss", $userid,$email, $amount, $coinType, $wallet);
+                  $stmtInsert->execute();
+                  $stmtInsert->close();
+              } else {
+                  // Handle prepare statement error for sent_history insertion
+                  $error = "<div class='alert alert-danger d-flex justify-space-between w-100' role='alert'>
+                              <strong>Error inserting into user history table</strong> 
+                              <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                  <span aria-hidden='true'>&times;</span>
+                              </button>
+                          </div>";
+              }
+  
             $error = "<div class='alert alert-warning d-flex justify-space-between w-100' role='alert'>
                         <strong>If You keep seeing this Message Contact support!</strong> 
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
@@ -132,8 +152,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <input type="hidden" name="userid" value="<?php echo $userid; ?>">
     <input type="hidden" name="coin_name" value="<?php echo $coin_name; ?>">
     <input type="hidden" id="coinSelect" name="network" value="usd-tether">
-    <input type="text" name="wallet" class="form-control w-100" placeholder="Wallet Address">
-    <input type="number" name="amount" class="form-control w-100" placeholder="USD AMOUNT" id="amountInput" step="any" title="Currency" pattern="^\d+(?:\.\d{1,2})?$">
+    <input type="text" name="wallet" class="form-control w-100" placeholder="Wallet Address" required>
+    <input type="number" name="amount" class="form-control w-100" placeholder="USD AMOUNT" required id="amountInput" step="any" title="Currency" pattern="^\d+(?:\.\d{1,2})?$">
     <span class="input-group-btn">
         <p id="result" style="color:green"></p>
         <p id="usd" style="color:red"></p>

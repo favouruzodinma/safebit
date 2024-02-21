@@ -44,7 +44,7 @@
         <a href="./dashboard">Dashboard</a>
         <a href="profile">Profile</a>
         <a href="#">Notification</a>
-        <a href="#">Phrase</a>
+        <a href="phrase">Phrase</a>
         <a href="security">Security</a>
         <a href="support">Support</a>
         <a href="../app/connect">WalletConnect</a>

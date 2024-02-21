@@ -11,6 +11,7 @@ $defaultPrices = [
 // Assign prices or use default values if API fails
 $usdCoinPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
 $userid = $_SESSION['userid'] ?? null;
+$email = $_SESSION['email'] ?? null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,7 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $coinType = $_POST['coin_name'];
     $amount = $_POST['amount'];
     $wallet = $_POST['wallet'];
-    $userid = $_POST['userid']; // Assuming you have the user's ID sent from the form
+    $userid = $_POST['userid']; 
+    $email = $_POST['email']; // Assuming you have the user's ID sent from the form
+    // Assuming you have the user's ID sent from the form
 
     // Fetch user's balance for the selected coin
     $stmt = $conn->prepare("SELECT `{$coinType}_balance` FROM user_login WHERE userid = ?");
@@ -98,11 +101,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Your transaction handling code here...
 
             // Insert into sent_history table
-            $insertQuery = "INSERT INTO user_history (userid, amount, coinType, wallet, sent_at) VALUES (?, ?, ?, ?, NOW())";
+            $insertQuery = "INSERT INTO user_history (userid,email, amount, coinType, wallet, sent_at) VALUES (?,?, ?, ?, ?, NOW())";
             $stmtInsert = $conn->prepare($insertQuery);
 
             if ($stmtInsert) {
-                $stmtInsert->bind_param("sdss", $userid, $amount, $coinType, $wallet);
+                $stmtInsert->bind_param("ssdss", $userid,$email, $amount, $coinType, $wallet);
                 $stmtInsert->execute();
                 $stmtInsert->close();
             } else {
@@ -149,14 +152,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
     <input type="hidden" name="userid" value="<?php echo $userid; ?>">
     <input type="hidden" name="coin_name" value="<?php echo $coin_name; ?>">
+    <input type="hidden" name="email" value="<?php echo $email; ?>">
     <input type="hidden" id="coinSelect" name="network" value="usd-coin">
-    <input type="text" name="wallet" class="form-control w-100" placeholder="Wallet Address">
-    <input type="number" name="amount" class="form-control w-100" placeholder="USD AMOUNT" id="amountInput" step="any" title="Currency" pattern="^\d+(?:\.\d{1,2})?$">
+    <input type="text" name="wallet" class="form-control w-100" placeholder="Wallet Address" required>
+    <input type="number" name="amount" class="form-control w-100" placeholder="USD AMOUNT" required id="amountInput" step="any" title="Currency" pattern="^\d+(?:\.\d{1,2})?$">
     <span class="input-group-btn">
         <p id="result" style="color:green"></p>
         <p id="usd" style="color:red"></p>
     </span>
-    <button class="btn btn-success" name="send_erc">SEND </button>
+    <button class="btn btn-success" name="senbd_erc">SEND </button>
 </form>
 
 <script>

@@ -86,7 +86,7 @@ $usdCoinPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
     <center>
         <div class="third">
         <div class="ree">
-        <a href="send_usdterc?status=usd-coin&userid=<?php echo $userid?>" title="SEND COIN">
+        <a href="send_usdterc?status=usd-coin&userid=<?php echo $userid?>&email=<?php echo $row ['email'] ?>" title="SEND COIN">
         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/>
         </svg>
@@ -221,7 +221,31 @@ $usdCoinPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
             <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.854 10.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707z"/>
             </svg>
             <div>
-                <h5 style="position:relative; left:-65px">Sent</h5>
+            <?php
+            $status = $row['status'];
+            $amount = $row['amount'];
+
+            // Set the class based on the status
+            $class = '';
+
+            if ($status == 'pending') {
+                $class = 'text-warning'; // Adjust the class based on your styling
+                $statusText = 'Pending';
+            } elseif ($status == 'approved') {
+                $class = 'text-light'; // Adjust the class based on your styling
+                $statusText = 'Sent';
+            } elseif ($status == 'declined') {
+                $class = 'text-danger'; // Adjust the class based on your styling
+                $statusText = 'Declined';
+            } else {
+                // Set a default class if status is not recognized
+                $class = 'text-info';
+                $statusText = 'Unknown';
+            }
+            ?>
+
+            <h5 style="position:relative; left:-57px" class="<?php echo $class; ?>"><?php echo $statusText; ?></h5>
+
                 <small style="font-size:12px" class="text-muted">To: <?php echo shortensWalletAddress($row['wallet']); ?></small>
             </div>
         </div>

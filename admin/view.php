@@ -135,10 +135,13 @@ $usdcPrice = $prices['usd-coin']['usd'] ?? $defaultPrices['usd-coin'];
                                             <!-- <input type="text" class="form-control" id="fullname"  value=""> -->
                                             <select name="coin_name" id="" class="form-control">
 												<option value="bitcoin">BITCOIN</option>
+												<option value="binancecoin">BNB SMART CHAIN</option>
 												<option value="ethereum">ETHEREUM</option>
 												<option value="tron">TRON</option>
 												<option value="tether">USDT(TRC20)</option>
 												<option value="usd-coin">USDT(ERC20)</option>
+												<option value="usd-tether">USDT(BNB)</option>
+												<option value="usdc">USDC</option>
 											</select>
                                             </div>
                                         </div>

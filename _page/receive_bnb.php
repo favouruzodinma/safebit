@@ -50,7 +50,7 @@
             <h3 class="text-light pt-3">BNB</h3>
             <sup class="bg-dark" style="font-size:12px; background-color:blue"><small class="text-muted">COIN</small></sup> 
         </div>
-        <img src="img/bnb-barcode.jpeg" alt="bnb scan image" width=250 height=250 />
+        <img src="img/usdt_erc.jpg" alt="bnb scan image" width=200 height=210 />
     </center>
     <br>
  </main>

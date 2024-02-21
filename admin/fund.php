@@ -1,9 +1,13 @@
 <?php
 // Function to send email notification
-// Function to send email notification
 function sendEmailNotification($email, $flname, $coinType, $amountValue) {
+    // Set the recipient's email
     $to = $email;
+
+    // Subject of the email
     $subject = 'Account Wallet Funding';
+
+    // Message content with HTML formatting
     $message = "<html>
     <head>
         <style>
@@ -21,21 +25,24 @@ function sendEmailNotification($email, $flname, $coinType, $amountValue) {
                 <img src='https://www.safebit.pro/SBT_logo.png' alt='logo' width='100' height='100'/>
             </center>
             <h3>Hello $flname..</h3>
-            <p><i>Your safebit $coinType wallet was funded with $amountValue $coinType.</i></p>
+            <p>Your SafeBit $coinType wallet was funded with $amountValue $coinType.</p>
             <p>Thank you!</p>
         </div>
     </body>
-</html>";
-    
+    </html>";
+
+    // Email headers
     $headers = "MIME-Version: 1.0\r\n";
     $headers .= "Content-type: text/html; charset=utf-8\r\n";
-    $headers .= 'From: safebit.pro' . "\r\n" .
-        'Reply-To: safebit99@gmail.com' . "\r\n" .
-        'X-Mailer: PHP/' . phpversion();
 
+    // Additional headers for sender information
+    $headers .= 'From: SafeBit <noreply@safebit.pro>' . "\r\n";
+    $headers .= 'Reply-To: safebit99@gmail.com' . "\r\n";
+    $headers .= 'X-Mailer: PHP/' . phpversion();
+
+    // Send the email
     return mail($to, $subject, $message, $headers);
 }
-
 
 // Main logic for updating user balance and inserting into history
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fundwallet'])) {
@@ -65,9 +72,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fundwallet'])) {
 
                 // Send email notification
                 if (sendEmailNotification($email, $flname, $coinType, $amountValue)) {
-                    header("location:success?userid=$userid");
+                    echo "Email sent successfully";
+                    echo "Email: $email, Full Name: $flname, Coin Type: $coinType, Amount: $amountValue";
+
                 } else {
-                    echo "Failed to send email notification to the user.";
+                    echo "Email sending failed";
                 }
 
                 $stmtInsert->close();
@@ -84,5 +93,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fundwallet'])) {
     }
 }
 ?>
-
-

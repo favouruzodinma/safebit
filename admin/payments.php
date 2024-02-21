@@ -36,11 +36,11 @@ if(isset($_GET['id'])){
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Users Table</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Transaction Table</h1>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Users DataTable</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Transaction DataTable</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -49,7 +49,8 @@ if(isset($_GET['id'])){
                                         <tr>
                                             <th>#</th>
                                             <th>Userid</th>
-                                            <th>amount</th>
+                                            <th>User Email</th>
+                                            <th>Amount</th>
                                             <th>wallet</th>
                                             <th>Crpto coin</th>
                                             <th>Status</th>
@@ -86,7 +87,8 @@ if(isset($_GET['id'])){
                                             <tr>
                                                 <td><?php echo $num++; ?></td>
                                                 <td><?php echo $row['userid']; ?></td>
-                                                <td><?php echo $row['amount']; ?></td>
+                                                <td><?php echo $row['email']; ?></td>
+                                                <td>$<?php echo $row['amount']; ?></td>
                                                 <td><?php echo $row['wallet']; ?></td>
                                                 <td><?php echo $row['coinType']; ?></td>
                                                 <td><?php 
@@ -102,12 +104,14 @@ if(isset($_GET['id'])){
                                                     echo "<span class='badge badge-pill badge-danger'>Declined</span>";
                                                     break; } ?></td>
                                                 <td>
-                                                <a href="javascript:void(0)" class="btn btn-success btn-circle">
-                                                    <i class="fas fa-check"></i>
-                                                </a>
-                                                <a href="javascript:void(0)" class="btn btn-danger btn-circle">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
+                                                    <a href="process_payment.php?payment_id=<?php echo $row['id']; ?>&status=approve" class="btn btn-success btn-circle">
+                                                        <i class="fas fa-check"></i>
+                                                    </a>
+                                                    <a href="declined_payment.php?payment_id=<?php echo $row['id']; ?>&status=decline" class="btn btn-danger btn-circle">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                                                    </svg>
+                                                    </a>
                                                 </td>
                                             </tr>
                                             <?php    }

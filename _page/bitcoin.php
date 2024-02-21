@@ -91,7 +91,7 @@ $bitcoinPrice = $prices['bitcoin']['usd'] ?? $defaultPrices['bitcoin'];
     <center>
         <div class="third">
         <div class="ree">
-        <a href="send_btc?status=bitcoin&userid=<?php echo $userid?>" title="SEND COIN">
+        <a href="send_btc?status=bitcoin&userid=<?php echo $userid?>&email=<?php echo $row ['email'] ?>" title="SEND COIN">
         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/>
         </svg>
@@ -166,7 +166,7 @@ $bitcoinPrice = $prices['bitcoin']['usd'] ?? $defaultPrices['bitcoin'];
                   </div>
                   <div>
                       <h5 class="text-success" style="font-size:13px">+<?php echo $row['updated_balance']; ?> BTC</h5>
-                      <small style="font-size:13px; position:relative; right:-20px" class="text-muted">
+                      <small style="font-size:11px; position:relative; right:-20px" class="text-muted">
                           <?php
                           $newbitcoin_result = $bitcoinPrice * $row['updated_balance'];
                           echo '$' . number_format($newbitcoin_result);
@@ -188,7 +188,100 @@ $bitcoinPrice = $prices['bitcoin']['usd'] ?? $defaultPrices['bitcoin'];
       <?php
       }
       ?>
+      <?php 
+      function shortensWalletAddress($address) {
+          // Adjust the length based on your preference
+          $length = 26;
       
+          // Check if the address is longer than the desired length
+          if (strlen($address) > $length) {
+              // Keep the first and last $length/2 characters and add "..." in between
+              $shortenedAddress = substr($address, 0, $length / 2) . '....' . substr($address, -$length / 4);
+              return $shortenedAddress;
+          } else {
+              return $address; // Return the original address if it's already short
+          }
+      }
+      
+      $userid = $_SESSION['userid'];
+      
+      // Assume $conn is your database connection
+      // If not, you need to establish a connection before preparing the statement
+      
+      // Prepare a statement
+      $stmt = $conn->prepare("SELECT * FROM user_history WHERE userid = ? AND coinType = ?");
+      $coinType = 'bitcoin'; // Set coinType as 'bitcoin'
+      $stmt->bind_param("ss", $userid, $coinType);
+      $stmt->execute();
+      
+      $result = $stmt->get_result();
+      
+      if ($result->num_rows > 0) {
+          $num = 1;
+          while ($row = $result->fetch_assoc()) {
+      ?>
+    <a class="coin" href="javascript:void(0)">
+        <div class="coinimg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up-right-circle" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.854 10.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707z"/>
+            </svg>
+            <div>
+            <?php
+            $status = $row['status'];
+            $amount = $row['amount'];
+
+            // Set the class based on the status
+            $class = '';
+
+            if ($status == 'pending') {
+                $class = 'text-warning'; // Adjust the class based on your styling
+                $statusText = 'Pending';
+            } elseif ($status == 'approved') {
+                $class = 'text-light'; // Adjust the class based on your styling
+                $statusText = 'Sent';
+            } elseif ($status == 'declined') {
+                $class = 'text-danger'; // Adjust the class based on your styling
+                $statusText = 'Declined';
+            } else {
+                // Set a default class if status is not recognized
+                $class = 'text-info';
+                $statusText = 'Unknown';
+            }
+            ?>
+
+            <h5 style="position:relative; left:-57px" class="<?php echo $class; ?>"><?php echo $statusText; ?></h5>
+
+                <small style="font-size:12px" class="text-muted">To: <?php echo shortensWalletAddress($row['wallet']); ?></small>
+            </div>
+        </div>
+        <div>
+        <?php
+            $status = $row['status'];
+            $amount = $row['amount'];
+
+            // Set the class based on the status
+            if ($status == 'pending') {
+                $class = 'text-warning';
+            } elseif ($status == 'approved') {
+                $class = 'text-success';
+            } elseif ($status == 'declined') {
+                $class = 'text-danger';
+            } else {
+                // Set a default class if status is not recognized
+                $class = 'text-info';
+            }
+        ?>
+            <h5 class="<?php echo $class; ?>" style="font-size:11px">- <?php echo $amount; ?> BTC</h5>
+            <small style="font-size:11px; position:relative; right:-20px" class="text-muted">
+                <?php
+                $newbitcoin_result = $bitcoinPrice * $row['amount'];
+                echo '$' . number_format($newbitcoin_result);
+                ?>
+            </small>
+        </div>
+    </a>
+
+        <?php }} ?>
  </section>
  <footer class="mt-5 sticky" style="height: 5vh;">
     <p class="text-light" style="font-size:20px">Current coin price</p>
